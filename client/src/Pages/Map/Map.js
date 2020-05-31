@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
 
 
 import "./Map.css"
@@ -13,7 +14,9 @@ class Map extends Component {
         return (
             <div className="map-page-div">
                 <div className="map-page-header">Your Route</div>
-                <div style={{width : "80%", height : "fit-content;"}}>
+                <div style={{width : "80%", height : "fit-content"}}>
+                    <Button variant="contained" color="primary">I Have Picked Up My Passenger</Button>
+                    <div style={{height : "20px"}}></div>
                     <MapComponent/>
                 </div>
             </div>

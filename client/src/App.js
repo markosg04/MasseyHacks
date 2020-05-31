@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import getWeb3 from "./getWeb3";
 import {BrowserRouter, Switch, Route} from "react-router-dom"
-
+import { ethers } from 'ethers';
 
 
 
@@ -26,10 +26,10 @@ const THEME = createMuiTheme({
   },
   palette : {
     primary : {
-      main: '#3A719B',
+      main: '#5d6cf5',
     },
     secondary : {
-      main: '#3A719B',
+      main: '#5d6cf5',
     }
   }
 });
@@ -69,6 +69,7 @@ class App extends Component {
       const networkId = await web3.eth.net.getId();
 
       const account = accounts[0];
+      console.log(account)
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -87,44 +88,11 @@ class App extends Component {
       alert("YOU NEED TO GIVE YOUR LOCATION IN ORDER FOR THIS DECENTRALIZED APPLICATION TO FULLY OPERATE");
     }
 
-    var requestOptions = {
-      method: 'GET',
-      redirect: 'follow'
-    };
-    
-    fetch("http://localhost:3005/get", requestOptions)
-      .then(response => response.text())
-      .then(result => {
-        const MDBHash = result;
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        
-        var raw = JSON.stringify({"address": this.state.address,"hash": MDBHash});
-        
-        var requestOptions = {
-          method: 'POST',
-          headers: myHeaders,
-          body: raw,
-          redirect: 'follow'
-        };
-        
-        fetch("http://localhost:3005/validateUser", requestOptions)
-          .then(response => response.text())
-          .then(result => {
-            this.setState({
-              validation: result
-            })
-          })
-          .catch(error => console.log('error', error));
-
-      })
-      .catch(error => console.log('error', error));
-
   };
 
   render() {
-    if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
+    if (!this.state.account) {
+      return <div>Loading Web3, accounts</div>;
     }
     return (
       <MuiThemeProvider theme={THEME}>
@@ -141,13 +109,13 @@ class App extends Component {
                   <Order/>
                 </Route>
                 <Route path="/dashboard">
-                  <Dashboard/>
+                  <Dashboard />
                 </Route>
                 <Route path="/history">
                   <History/>
                 </Route>
                 <Route path="/driver">
-                  <Driver account={this.state.account} />
+                  <Driver account={this.state.account}/>
                 </Route>
               </Switch>
             </div>

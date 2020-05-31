@@ -24,6 +24,9 @@ var setCostRouter = require('./routes/setCost');
 var setDriverConfimationRouter = require('./routes/setDriverConfimation');
 var clearPendingStatusRouter = require('./routes/clearPendingStatus');
 var finalizeTripRouter = require('./routes/finalizeTrip');
+var stageDriverStatusRouter = require ('./routes/stageDriverStatus');
+var clearDriverStatusRouter = require ('./routes/clearDriverStatus');
+var returnDriverStatusRouter = require ('./routes/returnDriverStatus');
 
 var app = express();
 
@@ -54,6 +57,9 @@ app.use('/setCost', setCostRouter)
 app.use('/setDriverConfirmation', setUserConfirmationRouter);
 app.use('/clearPendingStatus', clearPendingStatusRouter);
 app.use('/finalizeTrip', finalizeTripRouter);
+app.use('/stageDriverStatus', stageDriverStatusRouter);
+app.use('/clearDriverStatus', clearDriverStatusRouter);
+app.use('/returnDriverStatus', returnDriverStatusRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

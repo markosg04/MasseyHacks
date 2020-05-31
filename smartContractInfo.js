@@ -1,5 +1,10 @@
 exports.abi = [
     {
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "fallback"
+    },
+    {
       "constant": false,
       "inputs": [
         {
@@ -90,6 +95,45 @@ exports.abi = [
       "inputs": [
         {
           "internalType": "address",
+          "name": "_driver",
+          "type": "address"
+        }
+      ],
+      "name": "stageDriverStatus",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "returnDriverStatus",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "clearDriverStatus",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
           "name": "_user",
           "type": "address"
         }
@@ -165,5 +209,5 @@ exports.abi = [
       "stateMutability": "payable",
       "type": "function"
     }
-];
-exports.address = '0xef4028467533892bf1AC489Fa6b6Cb957f72C9B9';
+  ];
+exports.address = '0x9a105C057683E06b5257aB9AbaE1c3B7A16BFc83';

@@ -48,6 +48,7 @@ class History extends Component {
                         <div className="line-graph-header">Usage Over Past Year</div>
                         <LineGraph data={data}/>
                     </div>
+                    <div style={{height : "30px"}}/>
                     <div>
                         <div className="line-graph-header">Average Costs of Rides</div>
                         <OtherGraph/>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import getWeb3 from "../../getWeb3";
 
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
@@ -29,80 +30,112 @@ class Driver extends Component {
         console.log(this.state);
     }
     
-    componentDidMount = () => {
+    componentDidMount = async () => {
+        console.log(this.props);
+        try {
+            // Get network provider and web3 instance.
+            const web3 = await getWeb3();
+      
+            // Use web3 to get the user's accounts.
+            const accounts = await web3.eth.getAccounts();
+      
+            // Get the contract instance.
+            const networkId = await web3.eth.net.getId();
+      
+            const account = accounts[0];
+            console.log(account);
+            // Set web3, accounts, and contract to the state, and then proceed with an
+            // example of interacting with the contract's methods.
+            this.setState({ web3, accounts, account }, this.runExample);
+          } catch (error) {
+            // Catch any errors for any of the above operations.
+            alert(
+              `Failed to load web3, accounts, or contract. Check console for details.`,
+            );
+            console.error(error);
+          }
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(this.showPosition);
         } else {
             alert("YOU NEED TO GIVE YOUR LOCATION IN ORDER FOR THIS DECENTRALIZED APPLICATION TO FULLY OPERATE");
         }
-        console.log(this.props);
+
+        console.log(this.state);
+        // console.log(this.props);
+        // console.log(this.state);
+
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+        
+        fetch("http://localhost:3005/get", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                const MDBHash = result;
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+                
+                // console.log(this.props)
+                var raw = JSON.stringify({"address": this.props.account,"hash": MDBHash});
+                
+                var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                };
+                
+                fetch("http://localhost:3005/validateUser", requestOptions)
+                .then(response => response.text())
+                .then(result => {
+                    this.setState({
+                        validation: result
+                    })
+                    console.log(this.state);
+                })
+                .catch(error => console.log('error', error));
+        
+            })
+            .catch(error => console.log('error', error));
+
     }
 
     handleSubmit = () => {
-    var requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-    };
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
         
-    fetch("http://localhost:3005/get", requestOptions)
-        .then(response => response.text())
-        .then(result => {
-            const hash = result;
-            var raw = JSON.stringify({
-                "address": this.state.account,
-                "latitude": this.state.latitude,
-                "longitude": this.state.longitude,
-                "hash": hash,
-                "carName": this.state.carName,
-                "seats": this.state.seats,
-                "city": this.state.city,
-                "state": this.state.state,
-                "country": this.state.country,
-                "fullname": this.state.firstname + this.state.lastname
-            });
-            
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-            
-
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-
-            fetch("http://localhost:3005/addDriver", requestOptions)
-                .then(response => response.text())
-                .then(result => {
-                    const MDBHash = result;
-                    var myHeaders = new Headers();
-                    myHeaders.append("Content-Type", "application/json");
-                    
-                    var raw = JSON.stringify({"hash": MDBHash});
-                    
-                    var requestOptions = {
-                        method: 'POST',
-                        headers: myHeaders,
-                        body: raw,
-                        redirect: 'follow'
-                    };
-                    
-                    fetch("http://localhost:3005/set", requestOptions)
-                        .then(response => response.text())
-                        .then(result => console.log(result))
-                        .catch(error => console.log('error', error));
+        var raw = JSON.stringify({
+            "address": this.props.account,
+            "latitude": this.state.latitude,
+            "longitude": this.state.longitude,
+            "carName": this.state.carName,
+            "seats": this.state.seats,
+            "city": this.state.city,
+            "state": this.state.state,
+            "country": this.state.country,
+            "fullname": this.state.firstname + this.state.lastname
+        });
         
-                })
-                .catch(error => console.log('error', error));
-
-        })
-        .catch(error => console.log('error', error));
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+        
+        fetch("http://localhost:3005/addDriver", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
 
 
     }
 
     render() { 
+
+
         return (
             <div className="driver-page-div">
                 <div className="driver-header"> Become a Driver </div>
@@ -132,6 +165,8 @@ class Driver extends Component {
                 </div>
             </div>
         );
+
+        
     }
 }
  

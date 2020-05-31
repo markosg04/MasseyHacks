@@ -3,6 +3,12 @@
 const express = require('express');
 const IPFS = require('ipfs-api');
 const axios = require('axios');
+const ethers = require('ethers');
+const { abi, address } = require('../smartContractInfo');
+
+const URL = 'HTTP://127.0.0.1:7545';
+const customHttpProvider = new ethers.providers.JsonRpcProvider(URL);
+let Contract = new ethers.Contract(address, abi, customHttpProvider.getSigner(0));
 
 const ipfs = new IPFS ({
     host: 'ipfs.infura.io',
@@ -24,8 +30,9 @@ const get = async hash => {
 }
 
 const addDriverToMDB = async (address, longitude, latitude, hash, carName, seats, city, state, country, fullname) => {
-    if (hash === 'QmbJWAESqCsf4RFCqEY7jecCashj8usXiyDNfKtZCwwzGb') { // empty
+    if (hash === "QmbJWAESqCsf4RFCqEY7jecCashj8usXiyDNfKtZCwwzGb") { // empty
         let obj = {};
+        console.log('empty');
 
         obj[address] = {
             longitude,
@@ -87,16 +94,19 @@ router.post('/', async function (req, res, next) {
     const ADDRESS = req.body.address;
     const LONGITUDE = req.body.longitude;
     const LATITUDE = req.body.latitude;
-    const HASH = req.body.hash;
+    // const HASH = req.body.hash;
     const CAR_NAME = req.body.carName;
     const SEATS = req.body.seats;
     const CITY = req.body.city;
     const STATE = req.body.state;
     const COUNTRY = req.body.country;
     const FULL_NAME = req.body.fullname;
+    const HASH = await Contract.get();
 
-    await addDriverToMDB(ADDRESS, LONGITUDE, LATITUDE, HASH, CAR_NAME, SEATS, CITY, STATE, COUNTRY, FULL_NAME).then(result => {
-        res.send(`${result}`);
+    addDriverToMDB(ADDRESS, LONGITUDE, LATITUDE, HASH, CAR_NAME, SEATS, CITY, STATE, COUNTRY, FULL_NAME).then(result => {
+        Contract.set(result).then(() => {
+            res.send('We chilling!');
+        })
     })
 
 })

@@ -3,6 +3,12 @@
 const express = require('express');
 const IPFS = require('ipfs-api');
 const axios = require('axios');
+const ethers = require('ethers');
+const { abi, address } = require('../smartContractInfo');
+
+const URL = 'HTTP://127.0.0.1:7545';
+const customHttpProvider = new ethers.providers.JsonRpcProvider(URL);
+let Contract = new ethers.Contract(address, abi, customHttpProvider.getSigner(0));
 
 const ipfs = new IPFS ({
     host: 'ipfs.infura.io',
@@ -28,7 +34,6 @@ const SphericalLawOfCosines = (lat1, lon1, lat2, lon2) => {
     const d = Math.acos( Math.sin(φ1)*Math.sin(φ2) + Math.cos(φ1)*Math.cos(φ2) * Math.cos(Δλ) ) * R;
     return d;
 }
-
 
 const queryDrivers = async (hash, latitude, longitude, seats) => {
     const MDB = await get(hash);
@@ -70,7 +75,12 @@ router.post('/', async function (req, res, next) {
     const SEATS = req.body.seats;
 
     queryDrivers(HASH, LATITUDE, LONGITUDE, SEATS).then(result => {
-        res.send(`${result}`);
+        for (let i = 0; i < result.length; i++) {
+            Contract.addEligibleDriver(result[i]);
+            // ['asdasd ,jfkjdadkasjdas', adasjhdiasdhuiy8u329y34ew, ad8u4e92ydhadyads,d8uy298ydhda,2d8u2q8e9273974,273982739732237kdjaosi]
+        }
+
+        res.send("Success")
     })
 
 })

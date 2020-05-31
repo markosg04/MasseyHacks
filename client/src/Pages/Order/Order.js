@@ -22,9 +22,28 @@ class Order extends Component {
         super(props);
         this.state = {
             loading : false,
+            reqSent : true,
             address : "",
-            seats : ""
+            seats : "",
+            cost: null
         }
+    }
+
+    showPosition = pos => {
+        this.setState({
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude
+        })
+    
+        console.log(this.state);
+    }
+
+    componentDidMount() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.showPosition);
+        } else {
+            alert("YOU NEED TO GIVE YOUR LOCATION IN ORDER FOR THIS DECENTRALIZED APPLICATION TO FULLY OPERATE");
+        }   
     }
 
     handleChange = address => {
@@ -40,7 +59,10 @@ class Order extends Component {
     handleSelect = address => {
         geocodeByAddress(address)
             .then(results => getLatLng(results[0]))
-            .then(latLng => console.log('Success', latLng))
+            .then(latLng => {
+                console.log('Success', latLng)
+                this.setState({lat : latLng.lat, long : latLng.lng})
+            })
             .catch(error => console.error('Error', error));
     };
 
@@ -58,6 +80,25 @@ class Order extends Component {
         this.setState({address : e.target.value})
     }
 
+    sendOrder(){
+        const COST = this.generateCost(this.state.latitude, this.state.longitude, this.state.lat, this.state.long);
+    }
+    
+    generateCost = (lat1, lon1, lat2, lon2) => {
+        const φ1 = lat1 * Math.PI/180, φ2 = lat2 * Math.PI/180, Δλ = (lon2-lon1) * Math.PI/180, R = 6371e3;
+        const d = Math.acos( Math.sin(φ1)*Math.sin(φ2) + Math.cos(φ1)*Math.cos(φ2) * Math.cos(Δλ) ) * R;
+        const dCost = Math.round(((d/700) + Number.EPSILON) * 100) / 100;
+        this.setState({
+            cost: dCost
+        })
+        return dCost;
+
+    }
+
+    handleSubmit = () => {
+        
+
+    }
 
     render() { 
         return (
@@ -136,30 +177,35 @@ class Order extends Component {
                                 ></TextField>
                             </div> 
                             <div style={{height : "50px", color : "white"}}></div>
-                            <Button variant="contained" color="primary">
+                            <Button variant="contained" color="primary" onClick={() => this.sendOrder()}>
                                 Submit
                             </Button>
                         </div>
                         <div className="order-result">
-                            {this.state.loading ? 
-                            <CircularProgress/> 
-                            : 
-                            <div style={{display : "flex"}}>
-                                <div style={{display : "flex", flexDirection : "column", width : "fit-content"}}>
-                                    <div className="potential-drivers-header">Potential Drivers</div>
-                                    <DriverCard name="Jerome" />
-                                    <DriverCard name="DeShawn" />
-                                    <DriverCard name="Tyrone" />
-                                    <DriverCard name="Terrance" />
-                                    <DriverCard name="Jamal" />
-                                </div>
-                                <div className="drivers-est-cost">
-                                    <div style={{fontSize : "20px"}}>
-                                        Estimated Cost:
+                            {this.state.reqSent 
+                            ? 
+                                this.state.loading 
+                                ?
+                                <CircularProgress/> 
+                                : 
+                                <div style={{display : "flex"}}>
+                                    <div style={{display : "flex", flexDirection : "column", width : "fit-content"}}>
+                                        <div className="potential-drivers-header">Potential Drivers</div>
+                                        <DriverCard name="Jerome" />
+                                        <DriverCard name="DeShawn" />
+                                        <DriverCard name="Tyrone" />
+                                        <DriverCard name="Terrance" />
+                                        <DriverCard name="Jamal" />
                                     </div>
-                                    <div style={{fontSize : "40px", marginTop : "30px"}}>$21</div>
+                                    <div className="drivers-est-cost">
+                                        <div style={{fontSize : "20px"}}>
+                                            Estimated Cost:
+                                        </div>
+                                        <div style={{fontSize : "40px", marginTop : "30px"}}>{this.state.cost} </div>
+                                    </div>
                                 </div>
-                            </div>
+                            :
+                            null
                             }
                             
                         </div>
