@@ -3,6 +3,7 @@ import getWeb3 from "../../getWeb3";
 
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import "./Driver.css"
 
@@ -18,7 +19,7 @@ class Driver extends Component {
             city: null,
             seats: null,
             carName: null
-        }
+                }
         console.log(this.props);
     }
     showPosition = pos => {
@@ -103,6 +104,9 @@ class Driver extends Component {
     }
 
     handleSubmit = () => {
+
+
+        this.setState({loading : true})
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         
@@ -127,7 +131,10 @@ class Driver extends Component {
         
         fetch("http://localhost:3005/addDriver", requestOptions)
             .then(response => response.text())
-            .then(result => console.log(result))
+            .then(result => {
+                console.log(result)
+                this.setState({loading : false})
+            })
             .catch(error => console.log('error', error));
 
 
@@ -161,6 +168,11 @@ class Driver extends Component {
                         <Button onClick={this.handleSubmit} variant="contained" color="primary">
                             Submit
                         </Button>
+                        <div style={{height : "10px"}}/>
+                        {this.state.loading ?
+                        <CircularProgress/>
+                        :
+                        null}
                     </div>
                 </div>
             </div>

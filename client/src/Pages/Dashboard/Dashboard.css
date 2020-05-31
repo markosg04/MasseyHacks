@@ -23,3 +23,11 @@
     display: flex;
     flex-direction: column;
 }
+
+.tes{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 25px;
+    color: #3d4478;
+    width: 80%;
+}

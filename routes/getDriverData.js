@@ -25,15 +25,17 @@ const get = async hash => {
 
 const getDriverData = async (address, hash) => {
     const MDB = await get(hash);
-    return MDB[hash];
+    return MDB[address];
 }
 
 router.post('/', async function (req, res, next) {
     const ADDRESS = req.body.address;
     const HASH = req.body.hash;
-
+    
     await getDriverData(ADDRESS, HASH).then(result => {
-        res.send(`${result}`);
+        console.log(result);
+        // const JSONOBject = JSON.stringify(result);
+        res.send(result);
     })
 
 })

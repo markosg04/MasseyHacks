@@ -26,6 +26,7 @@
     font-size: 21px;
     line-height: 25px;
     color: #748AA1;
+    height: fit-content;
 }
 
 .navlinks-holder{
@@ -69,9 +70,9 @@
 .navbar-profile-picture{
     width: 40px;
     height: 40px;
-    background: #d8d8d8;
     border-radius: 20px;
     margin-right: 10px;
+    background-image: url("./pp.png");
 }
 
 .navbar-profile-name{

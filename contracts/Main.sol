@@ -38,13 +38,23 @@ contract Main {
       clearDrivers(_user);
   }
   
-
+    bool temp;
   //WE NEED TO FIX THIS 
   function addEligibleDriver(address payable _address, address payable _driver) public {
       driverTable[_address].drivers.push(_driver);
       driverTable[_address].userConfirmation = false;
       driverTable[_address].driverConfirmation = false;
-      driverTableAddresses.push(_address);
+      for (uint256 j = 0; j < driverTableAddresses.length; j++) {
+        if (driverTableAddresses[j] == _address) {
+            temp == false;
+            break;
+        }
+      }
+      if (temp == true) {
+          driverTableAddresses.push(_address);
+      } else if (temp == false){
+          temp = true;
+      }
   }
   
   function returnDriverArray(address _user) public view returns (address[] memory) {

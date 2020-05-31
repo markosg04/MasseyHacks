@@ -5,8 +5,11 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { transferAbi, transferAddress } from "../../smartContractInfo.js"
+import { abi, address } from "../../smartContractInfo.js"
 import { ethers, utils } from 'ethers';
+import bigInt from 'big-integer';
+// import BigInt from 'BigInt';
+
 //import { ethers, utils } from 'ethers';
 
 import DriverCard from "../../Components/DriverCard/DriverCard.js"
@@ -87,9 +90,9 @@ class Order extends Component {
         this.setState({reqSent : true, loading : true})
 
         const COST = this.generateCost(this.state.latitude, this.state.longitude, this.state.lat, this.state.long);
-
-        let etherCost = (COST * 0.0031) * 1000000000000000000;
-
+        console.log(COST);
+        let etherCost = (COST * 0.0031) * 100000000000000000000;
+        console.log(etherCost);
         // eth.sendTransaction({from:this.props.account, to:"0xEeE7bf42AD0Fd6D110Dc477a37ADecbF06A276A1", value: web3.toWei(etherCost, "ether")})
         // let gasPrice = await provider.getGasPrice();
         let gasLimit = 21000;
@@ -97,7 +100,7 @@ class Order extends Component {
         let tx = this.props.signer.sendTransaction({
             // gasLimit: gasLimit,
             // gasPrice: this.props.gasPrice,
-            to: "0xEeE7bf42AD0Fd6D110Dc477a37ADecbF06A276A1",
+            to: address, // 
             value: etherCost
         }).then ( (t) => {
             console.log(t);
@@ -106,11 +109,12 @@ class Order extends Component {
 
         // let transferContract = new ethers.Contract(transferAddress, transferAbi, this.props.signer);
         // let newTransfer = await transferContract.transfer.sendtransaction("0xEeE7bf42AD0Fd6D110Dc477a37ADecbF06A276A1", {value: eth.toWei(etherCost, "ether" )})
-
+        const bigEtherCost = bigInt(Math.floor(etherCost/1000000000000000000))
+        console.log(bigEtherCost);
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         
-        var raw = JSON.stringify({"address": this.props.account,"amount": COST});
+        var raw = JSON.stringify({"address": this.props.account,"amount": bigEtherCost});
         
         var requestOptions = {
           method: 'POST',
@@ -150,7 +154,7 @@ class Order extends Component {
                       .then(response => response.text())
                       .then(result => {
                           console.log(result)
-
+                                
                             
 
                             this.setState({loading : false})
@@ -160,16 +164,6 @@ class Order extends Component {
                       .catch(error => console.log('error', error));
                 })
                 .catch(error => console.log('error', error));
-                
-
-
-
-
-
-
-
-
-
 
 
 
@@ -286,10 +280,10 @@ class Order extends Component {
                                     <div style={{display : "flex", flexDirection : "column", width : "fit-content"}}>
                                         <div className="potential-drivers-header">Potential Drivers</div>
                                         <DriverCard name="Jerome" />
-                                        <DriverCard name="DeShawn" />
-                                        <DriverCard name="Tyrone" />
-                                        <DriverCard name="Terrance" />
-                                        <DriverCard name="Jamal" />
+                                        <DriverCard name="Micheal" />
+                                        <DriverCard name="Jason" />
+                                        <DriverCard name="Reginald" />
+                                        <DriverCard name="Bob" />
                                     </div>
                                     <div className="drivers-est-cost">
                                         <div style={{fontSize : "20px"}}>

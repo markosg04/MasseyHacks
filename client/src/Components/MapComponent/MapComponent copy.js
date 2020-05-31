@@ -34,11 +34,11 @@ const MapWithADirectionsRenderer = compose(
     componentDidMount() {
       const DirectionsService = new google.maps.DirectionsService();
 
-      console.log(this.props.startLat)
+      
 
       DirectionsService.route({
-        origin: new google.maps.LatLng(this.props.startLat, this.props.startLong),
-        destination: new google.maps.LatLng(this.props.endLat, this.props.endLong),
+        origin: new google.maps.LatLng(43.475610, -80.591570),
+        destination: new google.maps.LatLng(41.8525800, -87.6514100),
         travelMode: google.maps.TravelMode.DRIVING,
       }, (result, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
@@ -78,10 +78,6 @@ class MapComponent extends Component {
             <div className="map-c" style={{height : "700px"}}>
                 <MapWithADirectionsRenderer
                  isMarkerShown
-                 startLat={this.props.startLat}
-                 startLong={this.props.startLong}
-                 endLat={this.props.endLat}
-                 endLong={this.props.endLong}
                  googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDeosvjuXnbDOLK0qsW-vBgqUoHIcRCkhY"
                  loadingElement={<div style={{ height: `100%` }} />}
                  containerElement={<div style={{ height: `700px`, width: "80%" }} />}

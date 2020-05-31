@@ -34,13 +34,13 @@ class History extends Component {
                 </div>
                 <div style={{width: "80%", height : "fit-content", display: "flex"}}>
                     <div className="history-card-container">
-                        <HistoryCard name="daniel" />
-                        <HistoryCard name="daniel" />
-                        <HistoryCard name="daniel" />
-                        <HistoryCard name="daniel" />
-                        <HistoryCard name="daniel" />
-                        <HistoryCard name="daniel" />
-                        <HistoryCard name="daniel" />
+                        <HistoryCard name="Daniel" dist="2.3" rat="3.5" pri="6"/>
+                        <HistoryCard name="Robert" dist="10.4" rat="4.3" pri="10"/>
+                        <HistoryCard name="Aditya" dist="2.6" rat="3.2" pri="7"/>
+                        <HistoryCard name="Evan" dist="5.0" rat="4.8" pri="15"/>
+                        <HistoryCard name="Tyrone" dist="3.8" rat="4.5" pri="8"/>
+                        <HistoryCard name="Markos" dist="1.3" rat="4.2" pri="4"/>
+                        <HistoryCard name="George" dist="19.3" rat="3.1" pri="40"/>
                    
                     </div>
                     <div className="history-graphs">

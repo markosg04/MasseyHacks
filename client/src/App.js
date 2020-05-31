@@ -123,7 +123,7 @@ class App extends Component {
             <div className="app-content-div">
               <Switch>
                 <Route path="/map">
-                  <Map  account={this.state.account}/>
+                  <Map  account={this.state.account} signer={this.state.signer}/>
                 </Route>
                 <Route path="/order">
                   <Order  account={this.state.account} signer={this.state.signer} gasPrice={this.state.gasPrice}/>

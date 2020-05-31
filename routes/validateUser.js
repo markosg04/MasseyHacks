@@ -42,7 +42,7 @@ router.post('/', async function (req, res, next) {
     const HASH = req.body.hash;
     // console.log(validateUser(ADDRESS, HASH));
     validateUser(ADDRESS, HASH).then(result => {
-        res.send(`${result}`);
+        res.send(result);
     })
     // res.send(validateUser(ADDRESS, HASH));
 

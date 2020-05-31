@@ -4,6 +4,8 @@ import {Link, useLocation} from 'react-router-dom'
 
 import "./Navbar.css"
 
+import PP from "./pp.png"
+
 function Navbar(){
     // Gets the current route from react-router-dom
     const location = useLocation() 
@@ -30,9 +32,10 @@ function Navbar(){
         <div className="navbar-div">
             <div className="navbar-inner-div">
                 <div className="profile-div">
-                    PeerPool
+                    <div style={{height: "200px"}}/>
+                    <img width="250" src="https://firebasestorage.googleapis.com/v0/b/social-media-59b42.appspot.com/o/pp.png?alt=media&token=36667df3-4305-4c38-b98b-d685130f4c95"></img> 
                     {/* <div className="navbar-profile-picture"></div>
-                    <div className="navbar-profile-name">Name</div> */}
+                     */}
                 </div>
                 <div className="navlinks-holder">
                     <div className="navlinks-container">

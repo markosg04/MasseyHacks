@@ -17,12 +17,12 @@ class HistoryComponent extends Component {
                     </div>
                     <div className="history-card-text-content-div">
                         <div className="history-card-title">{this.props.name}</div>
-                        <div className="history-card-last-check">5.7 Kilometers Travelled</div>
-                        <div className="history-card-last-appointment">Rating Given: 5/5</div>
+                        <div className="history-card-last-check">{this.props.dist} Kilometers Travelled</div>
+                        <div className="history-card-last-appointment">Rating Given: {this.props.rat}</div>
                     </div>
                 </div>
                 <div className="history-card-right">
-                    $21
+                    ${this.props.pri}
                     <div style={{width: "20px"}}/>
                 </div>
                 

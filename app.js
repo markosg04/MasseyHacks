@@ -21,8 +21,7 @@ var addEligibleDriverRouter = require('./routes/addEligibleDriver');
 var returnDriverArrayRouter = require('./routes/returnDriverArray');
 var setUserConfirmationRouter = require('./routes/setUserConfirmation');
 var setCostRouter = require('./routes/setCost');
-var setDriverConfimationRouter = require('./routes/setDriverConfimation');
-var clearPendingStatusRouter = require('./routes/clearPendingStatus');
+//var setDriverConfimationRouter = require('./routes/setDriverConfimation');
 var finalizeTripRouter = require('./routes/finalizeTrip');
 var stageDriverStatusRouter = require ('./routes/stageDriverStatus');
 var clearDriverStatusRouter = require ('./routes/clearDriverStatus');
@@ -55,7 +54,6 @@ app.use('/returnDriverArray', returnDriverArrayRouter);
 app.use('/setUserConfirmation', setUserConfirmationRouter);
 app.use('/setCost', setCostRouter)
 app.use('/setDriverConfirmation', setUserConfirmationRouter);
-app.use('/clearPendingStatus', clearPendingStatusRouter);
 app.use('/finalizeTrip', finalizeTripRouter);
 app.use('/stageDriverStatus', stageDriverStatusRouter);
 app.use('/clearDriverStatus', clearDriverStatusRouter);

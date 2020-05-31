@@ -32,11 +32,11 @@ class DashboardCard extends Component {
     }
 
 
-    onSubmitNo(){
-        console.log("FUCK")
+    onSubmitNo = () => {
+        this.props.no()
     }
-    onSubmitYes(){
-        console.log("FUCK")
+    onSubmitYes = () => {
+        this.props.yes()
     }
 
     render() { 
@@ -49,7 +49,7 @@ class DashboardCard extends Component {
                         <div className="driver-card-picture-icon"></div>
                     </div>
                     <div className="driver-card-text-content-div">
-                        <div className="dashboard-card-title">{this.props.account}</div>
+                        <div className="dashboard-card-title">{this.props.name}</div>
                         <div className="driver-card-last-check">5 kilometers away</div>
                         <div className="driver-card-last-appointment">Destination: 20km away</div>
                     </div>

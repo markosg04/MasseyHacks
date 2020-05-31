@@ -28,14 +28,14 @@
     "absolutePath": "/C/Users/marko/Documents/GitHub/MasseyHacks/contracts/Transfer.sol",
     "exportedSymbols": {
       "Transfer": [
-        425
+        466
       ]
     },
-    "id": 426,
+    "id": 467,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 411,
+        "id": 452,
         "literals": [
           "solidity",
           ">=",
@@ -54,16 +54,16 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 425,
+        "id": 466,
         "linearizedBaseContracts": [
-          425
+          466
         ],
         "name": "Transfer",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 423,
+              "id": 464,
               "nodeType": "Block",
               "src": "118:32:2",
               "statements": [
@@ -75,18 +75,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 419,
+                          "id": 460,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 440,
+                          "referencedDeclaration": 481,
                           "src": "135:3:2",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
                           }
                         },
-                        "id": 420,
+                        "id": 461,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -110,18 +110,18 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 416,
+                        "id": 457,
                         "name": "to",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 413,
+                        "referencedDeclaration": 454,
                         "src": "123:2:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address_payable",
                           "typeString": "address payable"
                         }
                       },
-                      "id": 418,
+                      "id": 459,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -135,7 +135,7 @@
                         "typeString": "function (uint256)"
                       }
                     },
-                    "id": 421,
+                    "id": 462,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -149,29 +149,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 422,
+                  "id": 463,
                   "nodeType": "ExpressionStatement",
                   "src": "123:22:2"
                 }
               ]
             },
             "documentation": null,
-            "id": 424,
+            "id": 465,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "transfer",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 414,
+              "id": 455,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 413,
+                  "id": 454,
                   "name": "to",
                   "nodeType": "VariableDeclaration",
-                  "scope": 424,
+                  "scope": 465,
                   "src": "77:18:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -180,7 +180,7 @@
                     "typeString": "address payable"
                   },
                   "typeName": {
-                    "id": 412,
+                    "id": 453,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "77:15:2",
@@ -197,19 +197,19 @@
               "src": "76:20:2"
             },
             "returnParameters": {
-              "id": 415,
+              "id": 456,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "118:0:2"
             },
-            "scope": 425,
+            "scope": 466,
             "src": "59:91:2",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 426,
+        "scope": 467,
         "src": "36:117:2"
       }
     ],
@@ -219,14 +219,14 @@
     "absolutePath": "/C/Users/marko/Documents/GitHub/MasseyHacks/contracts/Transfer.sol",
     "exportedSymbols": {
       "Transfer": [
-        425
+        466
       ]
     },
-    "id": 426,
+    "id": 467,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 411,
+        "id": 452,
         "literals": [
           "solidity",
           ">=",
@@ -245,16 +245,16 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 425,
+        "id": 466,
         "linearizedBaseContracts": [
-          425
+          466
         ],
         "name": "Transfer",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 423,
+              "id": 464,
               "nodeType": "Block",
               "src": "118:32:2",
               "statements": [
@@ -266,18 +266,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 419,
+                          "id": 460,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 440,
+                          "referencedDeclaration": 481,
                           "src": "135:3:2",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
                           }
                         },
-                        "id": 420,
+                        "id": 461,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -301,18 +301,18 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 416,
+                        "id": 457,
                         "name": "to",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 413,
+                        "referencedDeclaration": 454,
                         "src": "123:2:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address_payable",
                           "typeString": "address payable"
                         }
                       },
-                      "id": 418,
+                      "id": 459,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -326,7 +326,7 @@
                         "typeString": "function (uint256)"
                       }
                     },
-                    "id": 421,
+                    "id": 462,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -340,29 +340,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 422,
+                  "id": 463,
                   "nodeType": "ExpressionStatement",
                   "src": "123:22:2"
                 }
               ]
             },
             "documentation": null,
-            "id": 424,
+            "id": 465,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "transfer",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 414,
+              "id": 455,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 413,
+                  "id": 454,
                   "name": "to",
                   "nodeType": "VariableDeclaration",
-                  "scope": 424,
+                  "scope": 465,
                   "src": "77:18:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -371,7 +371,7 @@
                     "typeString": "address payable"
                   },
                   "typeName": {
-                    "id": 412,
+                    "id": 453,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "77:15:2",
@@ -388,19 +388,19 @@
               "src": "76:20:2"
             },
             "returnParameters": {
-              "id": 415,
+              "id": 456,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "118:0:2"
             },
-            "scope": 425,
+            "scope": 466,
             "src": "59:91:2",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 426,
+        "scope": 467,
         "src": "36:117:2"
       }
     ],
@@ -414,12 +414,13 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x3F624fa9849C537c14A2dd210C434F04d3511DBe",
-      "transactionHash": "0x7aa8f8d4b17e187d14aa5b6c5db47ffa10aeecce4fcfbb988fbeab6007d1501d"
+      "address": "0x2d57B109A71bADe94D2f98453833bcAf69b739Dd",
+      "transactionHash": "0xe9f0181975c3ffed410695a6ce046e1ce8904cc1123e4fb3b9bd13c40b3c640b"
     }
   },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-05-31T11:26:13.275Z",
+  "updatedAt": "2020-05-31T17:21:13.348Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },

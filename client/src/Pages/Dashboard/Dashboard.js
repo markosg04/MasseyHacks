@@ -7,7 +7,9 @@ import DashboardCard from "../../Components/DashboardCard/DashboardCard.js"
 class Dashboard extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = {
+          fullName : ""
+        }
     }
 
     componentDidMount() {
@@ -20,10 +22,11 @@ class Dashboard extends Component {
             .then(response => response.text())
             .then(result => {
                 const MDBHash = result;
+                console.log(MDBHash);
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
                 
-                var raw = JSON.stringify({"address": this.state.address,"hash": MDBHash});
+                var raw = JSON.stringify({"address": this.props.account,"hash": MDBHash});
                 
                 var requestOptions = {
                     method: 'POST',
@@ -43,10 +46,9 @@ class Dashboard extends Component {
                         if (this.state.validation === "Driver"){
                             var myHeaders = new Headers();
                             myHeaders.append("Content-Type", "application/json");
-                            
                             var raw = JSON.stringify({"address": this.props.account});
                             
-                            var requestOptions = {
+                            var requestOptions = {  
                               method: 'POST',
                               headers: myHeaders,
                               body: raw,
@@ -67,7 +69,9 @@ class Dashboard extends Component {
                                     .then(response => response.text())
                                     .then(result => {
                                         console.log("ghdsfiuosahdif" , result)
-                                        var address = result
+                                        const USER_ADDRESS = result;
+                                        localStorage.setItem('USER_ADDRESS', USER_ADDRESS);
+                                        // localStorage.getItem('USER_ADDRESS');
                                         var requestOptions = {
                                             method: 'GET',
                                             redirect: 'follow'
@@ -77,15 +81,14 @@ class Dashboard extends Component {
                                             .then(response => response.text())
                                             .then(result => {
                                                 console.log(result)
-                                                if (address !== "0x0000000000000000000000000000000000000000"){
-                                                    this.setState({request : true})
-                                                    this.setState({passengerAddress : address})
-
-
+                                                console.log(MDBHash, USER_ADDRESS);
+                                                console.log(USER_ADDRESS !== "0x0000000000000000000000000000000000000000");
+                                                if (USER_ADDRESS !== "0x0000000000000000000000000000000000000000"){
+                                                    this.setState({passengerAddress: USER_ADDRESS})
                                                     var myHeaders = new Headers();
                                                     myHeaders.append("Content-Type", "application/json");
                                                     
-                                                    var raw = JSON.stringify({"hash": MDBHash ,"address": address});
+                                                    var raw = JSON.stringify({"hash": MDBHash ,"address": this.props.account});
                                                     
                                                     var requestOptions = {
                                                       method: 'POST',
@@ -97,11 +100,15 @@ class Dashboard extends Component {
                                                     fetch("http://localhost:3005/getDriverData", requestOptions)
                                                       .then(response => response.text())
                                                       .then(result => {
-                                                          console.log(result)
+                                                          result = JSON.parse(result);
+                                                          console.log(result);
+                                                          console.log(result);  
+                                                          this.setState({
+                                                            fullName : result.fullname
+                                                          })
+                               
                                                         })
                                                       .catch(error => console.log('error', error));
-
-
 
                                                 }
                                             })
@@ -125,8 +132,9 @@ class Dashboard extends Component {
     }
 
 
+
     clickNo(){
-        this.setState({request : false})
+        this.setState({fullName : ""})
     }
 
     clickYes(){
@@ -146,17 +154,6 @@ class Dashboard extends Component {
           .then(response => response.text())
           .then(result => {
               console.log(result)
-
-
-
-
-
-
-
-
-
-
-
             })
           .catch(error => console.log('error', error));
     }
@@ -165,15 +162,19 @@ class Dashboard extends Component {
         return (
             <div className="dashboard-div">
                 <div className="dashboard-header-div">Dashboard</div>
-                {this.state.validation === "Driver" && this.state.request  === true
-                ? 
+                {/* {this.state.validation === "Driver" && this.state.fullName === ""
+                ?  */}
                 <div className="dashboard-requests-div">
-                    <DashboardCard no={this.clickNo()} yes={this.clickYes()} account={this.state.passengerAddress}/>
-
+                    <DashboardCard no={() => this.clickNo()} yes={() => this.clickYes()} name={this.state.fullName}/>
                 </div>
-                :
-                null
-                }
+                {/* :
+                <div style={{width: "80%"}}>
+                  <div className="tes">Welcome to Peer Pool Decentralized Carpooling Services!</div>
+                  <div style={{height : "20px"}}></div>
+                  <div className="tes">Your Ride Status: In-Progress</div>
+                </div>
+
+                } */}
             </div>
         );
     }
