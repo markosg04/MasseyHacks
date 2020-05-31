@@ -5,6 +5,9 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { transferAbi, transferAddress } from "../../smartContractInfo.js"
+import { ethers, utils } from 'ethers';
+//import { ethers, utils } from 'ethers';
 
 import DriverCard from "../../Components/DriverCard/DriverCard.js"
 
@@ -22,7 +25,7 @@ class Order extends Component {
         super(props);
         this.state = {
             loading : false,
-            reqSent : true,
+            reqSent : false,
             address : "",
             seats : "",
             cost: null
@@ -80,8 +83,99 @@ class Order extends Component {
         this.setState({address : e.target.value})
     }
 
-    sendOrder(){
+    async sendOrder(){
+        this.setState({reqSent : true, loading : true})
+
         const COST = this.generateCost(this.state.latitude, this.state.longitude, this.state.lat, this.state.long);
+
+        let etherCost = (COST * 0.0031) * 1000000000000000000;
+
+        // eth.sendTransaction({from:this.props.account, to:"0xEeE7bf42AD0Fd6D110Dc477a37ADecbF06A276A1", value: web3.toWei(etherCost, "ether")})
+        // let gasPrice = await provider.getGasPrice();
+        let gasLimit = 21000;
+
+        let tx = this.props.signer.sendTransaction({
+            // gasLimit: gasLimit,
+            // gasPrice: this.props.gasPrice,
+            to: "0xEeE7bf42AD0Fd6D110Dc477a37ADecbF06A276A1",
+            value: etherCost
+        }).then ( (t) => {
+            console.log(t);
+        })
+    
+
+        // let transferContract = new ethers.Contract(transferAddress, transferAbi, this.props.signer);
+        // let newTransfer = await transferContract.transfer.sendtransaction("0xEeE7bf42AD0Fd6D110Dc477a37ADecbF06A276A1", {value: eth.toWei(etherCost, "ether" )})
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        
+        var raw = JSON.stringify({"address": this.props.account,"amount": COST});
+        
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
+        
+        fetch("http://localhost:3005/setCost", requestOptions)
+          .then(response => response.text())
+          .then(result => {
+              console.log(result)
+
+              var requestOptions = {
+                method: 'GET',
+                redirect: 'follow'
+              };
+              
+              fetch("http://localhost:3005/get", requestOptions)
+                .then(response => response.text())
+                .then(result => {
+                    var DBHash = result
+
+                    var myHeaders = new Headers();
+                    myHeaders.append("Content-Type", "application/json");
+                    
+                    var raw = JSON.stringify({"hash": DBHash,"Latitude": this.state.latitude,"Longitude": this.state.longitute,"seats": this.state.seats, address : this.props.account});
+                    
+                    var requestOptions = {
+                      method: 'POST',
+                      headers: myHeaders,
+                      body: raw,
+                      redirect: 'follow'
+                    };
+                    
+                    fetch("http://localhost:3005/queryDrivers", requestOptions)
+                      .then(response => response.text())
+                      .then(result => {
+                          console.log(result)
+
+                            
+
+                            this.setState({loading : false})
+
+
+                        })
+                      .catch(error => console.log('error', error));
+                })
+                .catch(error => console.log('error', error));
+                
+
+
+
+
+
+
+
+
+
+
+
+
+            })
+          .catch(error => console.log('error', error));
+
     }
     
     generateCost = (lat1, lon1, lat2, lon2) => {

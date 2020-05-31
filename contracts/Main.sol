@@ -23,7 +23,6 @@ contract Main {
       address payable finalDriver;
       bool userConfirmation;
       bool driverConfirmation;
-      bool pendingStatus;
       
   }
   
@@ -37,15 +36,15 @@ contract Main {
   function finalizeDriver(address payable _driver, address _user) public {
       driverTable[_user].finalDriver = _driver;
       clearDrivers(_user);
-      driverTable[_user].pendingStatus = false;
   }
   
-  function addEligibleDriver(address _driver) public {
-      driverTable[msg.sender].drivers.push(_driver);
-      driverTable[msg.sender].userConfirmation = false;
-      driverTable[msg.sender].driverConfirmation = false;
-      driverTable[msg.sender].pendingStatus = true;
-      driverTableAddresses.push(msg.sender);
+
+  //WE NEED TO FIX THIS 
+  function addEligibleDriver(address payable _address, address payable _driver) public {
+      driverTable[_address].drivers.push(_driver);
+      driverTable[_address].userConfirmation = false;
+      driverTable[_address].driverConfirmation = false;
+      driverTableAddresses.push(_address);
   }
   
   function returnDriverArray(address _user) public view returns (address[] memory) {
@@ -53,13 +52,16 @@ contract Main {
   }
   
   bool breaker;
-  function stageDriverStatus(address _driver) public {
+  address payable tempAddress;
+  
+  function stageDriverStatus(address payable _driver) public {
     for (uint256 i = 0; i < driverTableAddresses.length; i++) {
         if (breaker == false) {
             break;
         }
         for (uint256 j = 0; j < driverTable[driverTableAddresses[i]].drivers.length; j++) {
             if (driverTable[driverTableAddresses[i]].drivers[j] == _driver) {
+                tempAddress = driverTableAddresses[i];
                 breaker = false;
                 break;
             }
@@ -67,16 +69,15 @@ contract Main {
     }
   }
   
-  function returnDriverStatus() public view returns (bool) {
+  function returnDriverStatus() public view returns (address payable) {
       if (breaker == false) {
-          return true;
-      } else {
-          return false;
+          return tempAddress;
       }
   }
   
   function clearDriverStatus() public {
       breaker = true;
+      tempAddress = address(0);
   }
   
   
@@ -95,15 +96,9 @@ contract Main {
       driverTable[_user].driverConfirmation = true;
   }
   
-  function clearPendingStatus(address _user) public {
-      require (driverTable[_user].finalDriver != address(0));
-      driverTable[_user].pendingStatus = false;
-  }
-  
   function finalizeTrip(address _user) public payable {
       require (driverTable[_user].userConfirmation == true);
       require (driverTable[_user].driverConfirmation == true);
-      require (driverTable[_user].pendingStatus == false);
       require (address(this).balance >= driverTable[_user].amount);
       driverTable[_user].finalDriver.transfer(driverTable[_user].amount);
       driverTable[_user].userConfirmation == false;

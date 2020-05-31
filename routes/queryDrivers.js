@@ -76,7 +76,7 @@ router.post('/', async function (req, res, next) {
 
     queryDrivers(HASH, LATITUDE, LONGITUDE, SEATS).then(result => {
         for (let i = 0; i < result.length; i++) {
-            Contract.addEligibleDriver(result[i]);
+            Contract.addEligibleDriver(req.body.address, result[i]);
             // ['asdasd ,jfkjdadkasjdas', adasjhdiasdhuiy8u329y34ew, ad8u4e92ydhadyads,d8uy298ydhda,2d8u2q8e9273974,273982739732237kdjaosi]
         }
 

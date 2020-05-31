@@ -3,9 +3,6 @@ import getWeb3 from "./getWeb3";
 import {BrowserRouter, Switch, Route} from "react-router-dom"
 import { ethers } from 'ethers';
 
-
-
-
 import "./App.css";
 
 import Navbar from "./Components/Navbar/Navbar.js"
@@ -71,9 +68,15 @@ class App extends Component {
       const account = accounts[0];
       console.log(account)
 
+      const signer = (new ethers.providers.Web3Provider(window.ethereum)).getSigner()
+
+      const URL = 'HTTP://127.0.0.1:7545';
+      let provider = new ethers.providers.JsonRpcProvider(URL);
+      let gasPrice = provider.getGasPrice();
+
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, account }, this.runExample);
+      this.setState({ web3, accounts, account, signer, gasPrice }, this.runExample);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -87,6 +90,23 @@ class App extends Component {
     } else {
       alert("YOU NEED TO GIVE YOUR LOCATION IN ORDER FOR THIS DECENTRALIZED APPLICATION TO FULLY OPERATE");
     }
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({"address": this.state.account});
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch("http://localhost:3005/finalizeTrip", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
 
   };
 
@@ -103,13 +123,13 @@ class App extends Component {
             <div className="app-content-div">
               <Switch>
                 <Route path="/map">
-                  <Map/>
+                  <Map  account={this.state.account}/>
                 </Route>
                 <Route path="/order">
-                  <Order/>
+                  <Order  account={this.state.account} signer={this.state.signer} gasPrice={this.state.gasPrice}/>
                 </Route>
                 <Route path="/dashboard">
-                  <Dashboard />
+                  <Dashboard  account={this.state.account}/>
                 </Route>
                 <Route path="/history">
                   <History/>

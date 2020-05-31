@@ -8,7 +8,7 @@ const customHttpProvider = new ethers.providers.JsonRpcProvider(URL);
 let Contract = new ethers.Contract(address, abi, customHttpProvider.getSigner(0));
 
 router.post('/', async function (req, res, next) {
-    result = await Contract.finalizeDriver(req.body.payable, req.body.user);
+    result = await Contract.finalizeDriver(req.body.driver, req.body.user);
     res.send(`Finalized the contraction!`);
 })
 
