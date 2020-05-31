@@ -1,0 +1,17 @@
+.map-page-div{
+display: flex;
+flex-direction: column;
+align-items: center;
+height: fit-content;
+}
+
+.map-page-header{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    color: #3d4478;
+    width: 80%;
+    display: flex;
+    margin-top: 100px;
+    margin-bottom: 40px;
+}

@@ -1,0 +1,136 @@
+.order-page-header{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    color: #3d4478;
+    width: 80%;
+    display: flex;
+    margin-top: 100px;
+    margin-bottom: 40px;
+
+}
+
+.potential-drivers-header{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #3d4478;
+    margin-bottom: 20px;
+}
+
+.order-page-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Ubuntu', sans-serif;
+
+}
+
+.order-page-form-div{
+    display: flex;
+}
+
+.order-page-form-div{
+    width: 80%;
+    height: 700px;
+    background: white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    border-radius: 10px;
+    display: flex;
+
+
+}
+
+.form-form{
+    flex: 1;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-result{
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panelcard-name{
+    height: inherit;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+.panelcard-filler{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panelcard-icon{
+    height: inherit;
+    width: 40px;
+    border-top-left-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    transition: all 0.5s linear;
+}
+.panelcard-trash{
+    z-index: 100;
+}
+
+.panelcard-form{
+    width: 100%;
+    height: fit-content;
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.panelcard-textfield-sm{
+    width: 45%;
+}
+
+.panelcard-textfield-lg{
+    width: 90%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    min-height: 48px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.location-search-input{
+    width: inherit;
+}
+
+.autocomplete-dropdown-container{
+    position: absolute;
+    z-index: 1;
+    height: fit-content;
+    width: 250px;
+    max-height: 120px;
+    overflow-y: scroll;
+    background: white;
+}
+
+.suggestion-item{
+    margin: 0px;
+    padding: 10px;
+    position: relative;
+}
+
+.suggestion-item--active{
+    margin: 0px;
+    padding: 10px;
+    position: relative;
+
+}

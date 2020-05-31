@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&family=Ubuntu:wght@300;400;500&display=swap');
+
+
+.App {
+  width: 100vw;
+  height: fit-content;
+  display: flex;
+  background: #ebedff;
+  overflow-x: hidden;
+}
+
+.app-content-div{
+  flex: 1;
+  min-height: 100vh;
+  height: fit-content;
+}
