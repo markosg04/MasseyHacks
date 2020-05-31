@@ -1,0 +1,25 @@
+.dashboard-div{
+    width: inherit;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dashboard-header-div{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    color: #3d4478;
+    width: 80%;
+    display: flex;
+    margin-top: 100px;
+    margin-bottom: 40px;    
+}
+
+
+.dashboard-requests-div{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}

@@ -11,6 +11,7 @@
     "react-places-autocomplete": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.2.0",
+    "react-vis": "^1.11.7",
     "web3": "1.2.2"
   },
   "scripts": {

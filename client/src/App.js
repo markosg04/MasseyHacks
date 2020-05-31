@@ -34,14 +34,28 @@ const THEME = createMuiTheme({
   }
 });
 
-
-
-
-
-
-
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+  // state = { storageValue: 0, web3: null, accounts: null, contract: null };
+  constructor(props) {
+    super(props);
+    this.state = {
+      storageValue: 0, 
+      web3: null, 
+      accounts: null, 
+      account: null,
+      contract: null,
+      longitude: null,
+      latitude: null,
+      validation: null
+    }
+  }
+
+  showPosition = pos => {
+    this.setState({
+      latitude: pos.coords.latitude,
+      longitude: pos.coords.longitude
+    })
+  }
 
   componentDidMount = async () => {
     try {
@@ -54,10 +68,11 @@ class App extends Component {
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
 
+      const account = accounts[0];
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts }, this.runExample);
+      this.setState({ web3, accounts, account }, this.runExample);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -65,6 +80,46 @@ class App extends Component {
       );
       console.error(error);
     }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.showPosition);
+    } else {
+      alert("YOU NEED TO GIVE YOUR LOCATION IN ORDER FOR THIS DECENTRALIZED APPLICATION TO FULLY OPERATE");
+    }
+
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    
+    fetch("http://localhost:3005/get", requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        const MDBHash = result;
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        
+        var raw = JSON.stringify({"address": this.state.address,"hash": MDBHash});
+        
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
+        
+        fetch("http://localhost:3005/validateUser", requestOptions)
+          .then(response => response.text())
+          .then(result => {
+            this.setState({
+              validation: result
+            })
+          })
+          .catch(error => console.log('error', error));
+
+      })
+      .catch(error => console.log('error', error));
+
   };
 
   render() {
@@ -92,7 +147,7 @@ class App extends Component {
                   <History/>
                 </Route>
                 <Route path="/driver">
-                  <Driver/>
+                  <Driver account={this.state.account} />
                 </Route>
               </Switch>
             </div>

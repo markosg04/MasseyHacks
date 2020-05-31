@@ -1,0 +1,30 @@
+.history-header{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    color: #3d4478;
+    width: 80%;
+    display: flex;
+    margin-top: 100px;
+    margin-bottom: 40px;    
+}
+
+.history-card-container{
+width: 500px;
+height: fit-content;
+display: flex;
+flex-direction: column;
+align-items: flex-start
+}
+
+.history-graphs{
+    background: "blue;"
+}
+
+.line-graph-header{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #3d4478;
+    margin-bottom: 20px;
+}

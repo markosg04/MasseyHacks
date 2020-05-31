@@ -30,8 +30,9 @@ function Navbar(){
         <div className="navbar-div">
             <div className="navbar-inner-div">
                 <div className="profile-div">
-                    <div className="navbar-profile-picture"></div>
-                    <div className="navbar-profile-name">Name</div>
+                    PeerPool
+                    {/* <div className="navbar-profile-picture"></div>
+                    <div className="navbar-profile-name">Name</div> */}
                 </div>
                 <div className="navlinks-holder">
                     <div className="navlinks-container">

@@ -5,10 +5,10 @@ const { abi, address } = require('../smartContractInfo');
 
 const URL = 'HTTP://127.0.0.1:7545';
 const customHttpProvider = new ethers.providers.JsonRpcProvider(URL);
-let CONTRACT = new ethers.Contract(address, abi, customHttpProvider.getSigner(0));
+let Contract = new ethers.Contract(address, abi, customHttpProvider.getSigner(0));
 
-router.get('/', async function (req, res, next) {
-    result = await Contract.get();
+router.post('/', async function (req, res, next) {
+    result = await Contract.set(req.body.hash);
     res.send(result);
 })
 

@@ -1,4 +1,4 @@
-.driver-card-div{
+.history-card-div{
     background: rgb(230, 227, 255);
     box-shadow: 0px 1px 4px #E5E9F2;
     border-radius: 5px;
@@ -8,30 +8,32 @@
 
     height: fit-content;
     text-decoration: none;
-    margin-right: 100px;
+    margin-right: 300px;
     margin-bottom: 10px;
 }
 
-.driver-card-left{
+.history-card-left{
     display: flex;
 }
 
-.driver-card-right{
+.history-card-right{
     display: flex;
     flex: 1;
     justify-content: flex-end;
     align-items: center;
     color: #748AA1;
+    font-size: 25px;
+    font-weight: 500;
 
     
 }
-.driver-card-picture-div{
+.history-card-picture-div{
     width: 100px;
     display: flex;
     justify-content: center;
 }
 
-.driver-card-picture-icon{
+.history-card-picture-icon{
     width: 65px;
     height: 65px;
     background: #d8d8d8;
@@ -42,7 +44,7 @@
     background-position: center center;
 }
 
-.driver-card-text-content-div{
+.history-card-text-content-div{
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -52,17 +54,17 @@
     margin-bottom: 14px;
 }
 
-.driver-card-title{
+.history-card-title{
     font-family: 'Ubuntu', sans-serif;
     font-weight: 500;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 28px;
 
     color: #748AA1;
     margin: 2px;
 }
 
-.driver-card-last-check{
+.history-card-last-check{
     font-family: 'Rubik', sans-serif;
     font-weight: 300;
     font-size: 13px;
@@ -72,7 +74,7 @@
 
 }
 
-.driver-card-last-appointment{
+.history-card-last-appointment{
     font-family: 'Rubik', sans-serif;
     font-weight: 300;
     font-size: 13px;
@@ -82,7 +84,7 @@
 
 }
 
-.driver-card-next-appointment{
+.history-card-next-appointment{
     font-family: 'Rubik', sans-serif;
     font-style: normal;
     font-weight: bold;

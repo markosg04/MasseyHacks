@@ -21,7 +21,7 @@ class Order extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading : true,
+            loading : false,
             address : "",
             seats : ""
         }
@@ -144,14 +144,21 @@ class Order extends Component {
                             {this.state.loading ? 
                             <CircularProgress/> 
                             : 
-                            
-                            <div style={{display : "flex", flexDirection : "column"}}>
-                                <div className="potential-drivers-header">Potential Drivers</div>
-                                <DriverCard name="Jerome" />
-                                <DriverCard name="DeShawn" />
-                                <DriverCard name="Tyrone" />
-                                <DriverCard name="Terrance" />
-                                <DriverCard name="Jamal" />
+                            <div style={{display : "flex"}}>
+                                <div style={{display : "flex", flexDirection : "column", width : "fit-content"}}>
+                                    <div className="potential-drivers-header">Potential Drivers</div>
+                                    <DriverCard name="Jerome" />
+                                    <DriverCard name="DeShawn" />
+                                    <DriverCard name="Tyrone" />
+                                    <DriverCard name="Terrance" />
+                                    <DriverCard name="Jamal" />
+                                </div>
+                                <div className="drivers-est-cost">
+                                    <div style={{fontSize : "20px"}}>
+                                        Estimated Cost:
+                                    </div>
+                                    <div style={{fontSize : "40px", marginTop : "30px"}}>$21</div>
+                                </div>
                             </div>
                             }
                             

@@ -5,7 +5,7 @@ const IPFS = require('ipfs-api');
 const axios = require('axios');
 
 const ipfs = new IPFS ({
-    host: 'ipfs.infura.io',
+    hostt: 'ipfs.infura.io',
     port: 5001,
     protocol: 'https'
 })
