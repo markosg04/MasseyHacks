@@ -13,6 +13,7 @@ import Map from "./Pages/Map/Map.js"
 import Order from "./Pages/Order/Order.js"
 import Dashboard from "./Pages/Dashboard/Dashboard.js"
 import History from "./Pages/History/History"
+import Driver from "./Pages/Driver/Driver"
 
 
 import {MuiThemeProvider} from '@material-ui/core/styles'
@@ -89,6 +90,9 @@ class App extends Component {
                 </Route>
                 <Route path="/history">
                   <History/>
+                </Route>
+                <Route path="/driver">
+                  <Driver/>
                 </Route>
               </Switch>
             </div>

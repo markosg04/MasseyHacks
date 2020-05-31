@@ -21,7 +21,7 @@ class Order extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading : false,
+            loading : true,
             address : "",
             seats : ""
         }

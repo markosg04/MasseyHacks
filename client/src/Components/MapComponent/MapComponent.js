@@ -50,6 +50,8 @@ const MapWithADirectionsRenderer = compose(
       });
     }
   })
+
+  
 )(props =>
   <GoogleMap
     defaultZoom={7}

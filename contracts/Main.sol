@@ -13,7 +13,9 @@ contract Main {
     return storedData;
   }
  
-  receive() external payable { }
+  function () external payable {
+
+  }
   
   struct eligibleDrivers {
       address[] drivers;

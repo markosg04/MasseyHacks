@@ -1,0 +1,33 @@
+.driver-page-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.driver-header{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    color: #3d4478;
+    width: 80%;
+    display: flex;
+    margin-top: 100px;
+    margin-bottom: 40px;    
+}
+
+.driver-form-div-container{
+    width: 80%;
+    display: flex;
+}
+
+.driver-form-div{
+    width: 550px;
+    height: 500px;
+    background: white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
